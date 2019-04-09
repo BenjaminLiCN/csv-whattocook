@@ -24,12 +24,16 @@ $(document).ready(function() {
                     itemArray.push(obj);
                 });
 
-                //location.reload();
 
                 $.ajax({
+                    beforeSend: function() {
+                       console.log(JSON.stringify(itemArray));
+                    },
+                    type: 'POST',
+                    contentType:"application/json",
                     dataType:'json',
                     data: JSON.stringify(itemArray),
-                    url:'localhost:8080/setItems',
+                    url:'http://localhost:8080/setItems',
                     success: function(data){
                         console.log(data);
                     }
@@ -59,7 +63,7 @@ $(document).ready(function() {
             $.ajax({
                 dataType: 'json',
                 data: items,
-                url:'localhost:8080/setItems',
+                url:'http://localhost:8080/setItems',
                 success: function(data){
                     console.log(data);
                 }

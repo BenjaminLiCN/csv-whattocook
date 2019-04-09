@@ -15,10 +15,17 @@ import java.util.List;
 
 @RestController
 public class MainController {
-    @CrossOrigin(origins = "http://localhost:3000")
+    //@CrossOrigin(origins = "http://localhost:3000")
     @ResponseBody
     @RequestMapping(value = "/setItems", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String test(@RequestBody List<JSONObject> list) {
+    public String handleItems(@RequestBody List<JSONObject> list) {
+        System.out.println(list);
+        return "OK";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/setRecipes", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public String handleRecipes(@RequestBody List<JSONObject> list) {
         System.out.println(list);
         return "OK";
     }
