@@ -27,6 +27,6 @@ public class MainController {
     @RequestMapping(value = "/setRecipes", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public String handleRecipes(@RequestBody List<JSONObject> list) {
         System.out.println(list);
-        return "OK";
+        return "OK2";
     }
 }
