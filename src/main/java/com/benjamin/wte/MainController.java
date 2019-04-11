@@ -1,6 +1,8 @@
 package com.benjamin.wte;
 
 import com.alibaba.fastjson.JSONObject;
+import com.benjamin.wte.Service.CookService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,18 +17,16 @@ import java.util.List;
 
 @RestController
 public class MainController {
+    @Autowired
+    private CookService cookService;
+
     //@CrossOrigin(origins = "http://localhost:3000")
     @ResponseBody
-    @RequestMapping(value = "/setItems", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String handleItems(@RequestBody List<JSONObject> list) {
-        System.out.println(list);
-        return "OK";
+    @RequestMapping(value = "/setData", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public JSONObject handleData(@RequestBody JSONObject data) {
+        JSONObject recipe = cookService.dataProcess(data);
+
+        return recipe;
     }
 
-    @ResponseBody
-    @RequestMapping(value = "/setRecipes", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String handleRecipes(@RequestBody List<JSONObject> list) {
-        System.out.println(list);
-        return "OK2fs";
-    }
 }
