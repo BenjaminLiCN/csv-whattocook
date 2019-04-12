@@ -3,7 +3,8 @@
     "name": "startbootstrap-creative",
     "version": "5.1.4",
     "scripts": {
-        "start": "gulp watch"
+        "start": "gulp watch",
+        "build:prod": "cross-env NODE_ENV=production env_config=prod node build/build.js"
     },
     "description": "Creative is a stylish one page HTML theme for Bootstrap.",
     "keywords": [
@@ -38,6 +39,8 @@
     },
     "devDependencies": {
         "browser-sync": "2.26.3",
+        "cross-env": "^5.2.0",
+        "css-loader": "^2.1.1",
         "del": "4.0.0",
         "gulp": "4.0.0",
         "gulp-autoprefixer": "6.0.0",
@@ -47,6 +50,9 @@
         "gulp-rename": "1.4.0",
         "gulp-sass": "4.0.2",
         "gulp-uglify": "3.0.2",
-        "merge-stream": "^1.0.1"
+        "html-webpack-plugin": "^3.2.0",
+        "merge-stream": "^1.0.1",
+        "style-loader": "^0.23.1",
+        "webpack": "^4.29.6"
     }
 }

@@ -4,11 +4,13 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import com.benjamin.wte.Ingredient;
 import com.benjamin.wte.Item;
 import com.benjamin.wte.Recipe;
 import com.benjamin.wte.Service.CookService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,12 +23,49 @@ import java.util.Map;
 @Service
 public class CookServiceImpl implements CookService {
 
+    private String generateRecipe(List<Item> itemList,List<Recipe> recipeList){
+        List<Recipe> qualifiedRecipes = new ArrayList<Recipe>();
+        for(Recipe recipe : recipeList){
+            List<Ingredient> ingredients = recipe.getIngredients();
+            int flag = 0;
+            for(Ingredient ingredient : ingredients){
+                if(qualifiedIngredient(ingredient,itemList)){
+                    flag += 1;
+                }
+            }
+            if(flag==ingredients.size()){
+                qualifiedRecipes.add(recipe);
+            }
+
+        }
+        if (qualifiedRecipes.size()==0)
+            return null;
+        else{
+            int max = qualifiedRecipes.size();
+            int index = (int)(0+Math.random()*max);
+
+            return JSON.toJSONString(qualifiedRecipes.get(index));
+        }
+
+
+
+    }
+
+    private boolean qualifiedIngredient(Ingredient ingredient, List<Item> itemList) {
+        for(Item item : itemList){
+            if (item.getItem().equals(ingredient.getItem()) && item.getAmount()>ingredient.getAmount()){
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public JSONObject dataProcess(JSONObject data) {
 
         //String s = JSON.toJSONString(data);
         List<Item> itemList = null;
-        List<Recipe> recipeList;
+        List<Recipe> recipeList = null;
         Map mapTypes = data;
         System.out.println("这个是用JSON类的parseObject来解析JSON字符串!!!");
         for (Object obj : mapTypes.keySet()){
@@ -43,18 +82,11 @@ public class CookServiceImpl implements CookService {
                 recipeList = JSON.parseArray(recipeString, Recipe.class);
                 //System.out.println(recipeList);
             }
-            //itemList = new List<Item>();
-
         }
-        //for qualified recipes
-        //(int)(1+Math.random()*10)
-        System.out.println(itemList.get(0).getItem());
-
-        //JSONArray itemList = JSON.parseArray(items);
-
-        //List<Recipe> recipeList = JSON.parseArray(recipes, Recipe.class);
-        //System.out.println(itemList);
-        //System.out.println(recipeList);
-        return null;
+        String result = generateRecipe(itemList, recipeList);
+        if(result!=null)
+            return JSON.parseObject(result);
+        else
+            return null;
     }
 }

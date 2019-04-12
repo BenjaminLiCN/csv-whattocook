@@ -25,8 +25,13 @@ public class MainController {
     @RequestMapping(value = "/setData", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public JSONObject handleData(@RequestBody JSONObject data) {
         JSONObject recipe = cookService.dataProcess(data);
-
-        return recipe;
+        if (recipe!=null) {
+            System.out.println(recipe);
+            return recipe;
+        }
+        else
+            System.out.println("No luck");
+        return null;
     }
 
 }

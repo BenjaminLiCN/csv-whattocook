@@ -1,9 +1,9 @@
 function UploadData(){
-
-    $('.modal-backdrop').remove();
-    $('#fileLoader').remove();
+     $('#myModal').modal('show');
 }
 $(document).ready(function() {
+    $('#rSave').prop('disabled', true);
+    $('#myModal').modal('hide');
     $("#fileReader").fileinput({
         showPreview: true,
         showZoom:true,
@@ -12,7 +12,6 @@ $(document).ready(function() {
         allowedFileExtensions: ["csv","json"],
         maxFileCount: 2,
         minFileCount: 2,
-        uploadAsync: false,
         browseLabel: 'Select csv and json file'
     });
 
@@ -48,8 +47,11 @@ $(document).ready(function() {
                     items=itemArray;
                     payload.itms=Object(items);
                 }finally{
+                    if(typeof(payload.itms) == 'undefined'||typeof(payload.rcps) == 'undefined')
+                        return;
                     $.ajax({
                         beforeSend: function() {
+
                         },
                         type: 'POST',
                         contentType:"application/json",
@@ -57,7 +59,33 @@ $(document).ready(function() {
                         data: JSON.stringify(payload),
                         url:'http://localhost:8080/setData',
                         success: function(data){
-                            console.log(data);
+                            $('#rSave').prop('disabled', false);
+                            var rName = data.name;
+                            $('#rName').html(rName);
+                            var ingredients = data.ingredients;
+                            var number = 0;
+                            for(var m =0;m<ingredients.length;m++){
+                                number += 1;
+                                var tab = document.getElementById('rTable');
+                                for(var j=0;j<3;j++){
+                                    var rowIndex = tab.rows.length+1;
+                                    var tr  = tab.insertRow();
+                                    var td1 = tr.insertCell();
+                                    var td2 = tr.insertCell();
+                                    if(j==0){
+                                        td1.innerHTML = "Ingredient "+number;
+                                        td2.innerHTML = "Item: "+ingredients[m].item;
+                                    }
+                                    if(j==1){
+                                        td1.innerHTML = "";
+                                        td2.innerHTML = "Amout: "+ingredients[m].amount;
+                                    }
+                                    if(j==2){
+                                        td1.innerHTML = "";
+                                        td2.innerHTML = "Unit: "+ingredients[m].unit;
+                                    }
+                                }
+                            }
                         }
                     });
                 }
