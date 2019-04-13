@@ -3,14 +3,15 @@
 echo "build successfully, deploying to the server..."
 cd /var/lib/jenkins/workspace/whattocook
 echo "kill the existing process"
-pid=`ps -ef|grep -e root|grep -e SNAPSHOT|awk '{print $2}'`
+pid=`ps |grep java|awk '{print $1}'`
 if [[ "$pid" = "" ]]
 then
   echo "no process exists... move on to mvn compiling"
 else
-  ps -ef|grep -e root|grep -e SNAPSHOT|awk '{print $2}'|xargs sudo kill -9
+  ps |grep java|awk '{print $1}'|xargs sudo kill -9
+  echo "There is a process running"
 fi
-echo "process killed"
+
 echo "generating new target..."
 mvn clean package -Dmaven.test.skip=true
 cd target
