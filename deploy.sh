@@ -11,9 +11,4 @@ else
   ps |grep java|awk '{print $1}'|xargs sudo kill -9
   echo "There is a process running"
 fi
-cd target
-echo "run a new process:nohup java -jar benjamin-0.0.1-SNAPSHOT.jar > runLog.file 2>&1 &"
-nohup java -jar benjamin-0.0.1-SNAPSHOT.jar > runLog.file 2>&1 &
-ps
-echo "back end deployment completed!"
-ps
+BUILD_ID=dontKillMe nohup /home/deploy/startup.sh &
