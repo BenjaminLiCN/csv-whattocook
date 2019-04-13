@@ -18,7 +18,6 @@ public class MainController {
     @Autowired
     private CookService cookService;
 
-    //@CrossOrigin(origins = "http://localhost:3000")
     @ResponseBody
     @RequestMapping(value = "/setData", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public JSONObject handleData(@RequestBody JSONObject data) {
