@@ -6,11 +6,12 @@ echo "kill the existing process"
 
 pid=`ps -ef|grep -e root|grep -e SNAPSHOT|awk '{print $2}'`
 
-if [ ! -n $pid ];
+if [[ "$pid" = "" ]]
 then
   echo "no process exists... move on to mvn compiling"
 else
   ps -ef|grep -e root|grep -e SNAPSHOT|awk '{print $2}'|xargs sudo kill -9
+fi
 echo "process killed"
 echo "generating new target..."
 mvn clean package -Dmaven.test.skip=true
