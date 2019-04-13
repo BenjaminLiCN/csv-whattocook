@@ -32,7 +32,7 @@ public class CookServiceImpl implements CookService {
                     flag += 1;
                 }
             }
-            if(flag==ingredients.size()){
+            if(flag == ingredients.size()){
                 qualifiedRecipes.add(recipe);
             }
 
