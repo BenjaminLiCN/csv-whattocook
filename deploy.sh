@@ -3,7 +3,7 @@
 echo "build successfully, deploying to the server..."
 cd /var/lib/jenkins/workspace/whattocook
 echo "kill the existing process"
-ps -ef|grep -e root|grep -e SNAPSHOT|awk '{print $2}'|xargs kill -9
+ps -ef|grep -e root|grep -e SNAPSHOT|awk '{print $2}'|xargs sudo kill -9
 echo "process killed"
 echo "generating new target..."
 mvn clean package -Dmaven.test.skip=true
