@@ -1,4 +1,4 @@
-package com.benjamin.wte;
+package com.benjamin.wte.objects;
 
 /**
  * @Auther Benjamin(Jingyi Li) Li

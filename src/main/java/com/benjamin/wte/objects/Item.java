@@ -1,4 +1,4 @@
-package com.benjamin.wte;
+package com.benjamin.wte.objects;
 
 import java.util.Date;
 

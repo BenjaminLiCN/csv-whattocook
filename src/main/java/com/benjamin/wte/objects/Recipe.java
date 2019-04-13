@@ -1,7 +1,4 @@
-package com.benjamin.wte;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
+package com.benjamin.wte.objects;
 
 import java.util.List;
 

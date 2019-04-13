@@ -1,13 +1,12 @@
-package com.benjamin.wte.Service.impl;
+package com.benjamin.wte.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
-import com.benjamin.wte.Ingredient;
-import com.benjamin.wte.Item;
-import com.benjamin.wte.Recipe;
-import com.benjamin.wte.Service.CookService;
+import com.benjamin.wte.objects.Ingredient;
+import com.benjamin.wte.objects.Item;
+import com.benjamin.wte.objects.Recipe;
+import com.benjamin.wte.service.CookService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

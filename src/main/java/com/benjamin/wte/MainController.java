@@ -1,12 +1,10 @@
 package com.benjamin.wte;
 
 import com.alibaba.fastjson.JSONObject;
-import com.benjamin.wte.Service.CookService;
+import com.benjamin.wte.service.CookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * @Auther Benjamin(Jingyi Li) Li

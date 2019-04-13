@@ -1,8 +1,6 @@
-package com.benjamin.wte.Service;
+package com.benjamin.wte.service;
 
 import com.alibaba.fastjson.JSONObject;
-
-import java.util.List;
 
 /**
  * @Auther Benjamin(Jingyi Li) Li
