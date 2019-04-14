@@ -66,9 +66,8 @@ public class CookServiceImpl implements CookService {
         List<Item> itemList = null;
         List<Recipe> recipeList = null;
         Map mapTypes = data;
-        System.out.println("这个是用JSON类的parseObject来解析JSON字符串!!!");
+
         for (Object obj : mapTypes.keySet()){
-            //System.out.println("key为："+obj+"值为："+mapTypes.get(obj));
             Object o = mapTypes.get(obj);
 
             if(obj.toString()=="itms"){
