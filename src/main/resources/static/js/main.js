@@ -5,6 +5,8 @@ $(document).ready(function() {
     $('#rSave').prop('disabled', true);
     $('#myModal').modal('hide');
     $("#fileReader").fileinput({
+        enableResumableUpload: true,
+        uploadUrl:"#",
         showPreview: true,
         showZoom:true,
         showCaption:true,
@@ -12,18 +14,22 @@ $(document).ready(function() {
         allowedFileExtensions: ["csv","json"],
         maxFileCount: 2,
         minFileCount: 2,
+        showUpload:false,
         browseLabel: 'Select csv and json file'
     });
 
     $('#fileReader').on('filebatchselected', function(event, files) {
+        $(".file-preview-status").css("display","none");
         var items;
         var recipes;
         var payload={};
+        var values = Object.values(files);
+        if(values.length==1)
+            return;
         for(var i = 0;i < 2;i++){
-            var file=files[i];
-            //console.log(file);
+            var file=values[i];
             var reader = new FileReader();
-            reader.readAsText(file);            //以文本格式读取
+            reader.readAsText(file.file);            //以文本格式读取
             reader.onload = function(evt){
                 var data = evt.target.result;        //读到的数据
                 try{
